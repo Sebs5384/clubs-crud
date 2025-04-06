@@ -1,4 +1,4 @@
-import { ITeams } from "../interfaces/index";
+import { ITeams, ITeam } from "../interfaces/index";
 const BASE_URL = "http://localhost:5000";
 
 async function getTeams(): Promise<ITeams> {
@@ -14,6 +14,20 @@ async function getTeams(): Promise<ITeams> {
     };
 };
 
+async function getTeam(id: string): Promise<ITeam> {
+    const teamUrl = `${BASE_URL}/api/team/${id}`;
+
+    try {
+        const response = await fetch(teamUrl);
+        
+        const team = await response.json();
+        return team;
+    } catch (error) {
+        throw new Error(String(error));
+    };
+};
+
 export {
-    getTeams
+    getTeams,
+    getTeam
 };
